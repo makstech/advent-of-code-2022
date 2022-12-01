@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -13,9 +15,13 @@ func Day1() {
 
 	maxCalories := 0
 	currentCalories := 0
+	var calories []int
 
 	for _, s := range list {
 		if s == "" {
+			if currentCalories > 0 {
+				calories = append(calories, currentCalories)
+			}
 			currentCalories = 0
 		} else {
 			n, _ := strconv.Atoi(s)
@@ -27,5 +33,13 @@ func Day1() {
 		}
 	}
 
-	println("max calories: ", maxCalories)
+	fmt.Println("max calories: ", maxCalories)
+
+	sort.Ints(calories)
+	var totalCalories int
+	for _, elfCalories := range calories[len(calories)-3:] {
+		totalCalories += elfCalories
+	}
+
+	fmt.Println("total calories for top 3: ", totalCalories)
 }
