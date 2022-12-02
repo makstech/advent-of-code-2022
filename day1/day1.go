@@ -1,4 +1,4 @@
-package main
+package day1
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 func Day1() {
-	file, _ := os.ReadFile("input/day1.txt")
+	file, _ := os.ReadFile("day1/input.txt")
 	input := string(file)
 	list := strings.Split(input, "\n")
 
