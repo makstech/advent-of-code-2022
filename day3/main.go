@@ -34,6 +34,19 @@ func Day3() {
 	}
 
 	fmt.Println("total priority:", totalPriority)
+
+	totalGroupPriority := 0
+	for i := 0; i < len(list); i += 3 {
+		for _, c := range list[i] {
+			letter := string(c)
+			if strings.Contains(list[i+1], letter) && strings.Contains(list[i+2], letter) {
+				totalGroupPriority += priorities[letter]
+				break
+			}
+		}
+	}
+
+	fmt.Println("total group priority:", totalGroupPriority)
 }
 
 func FindSame(a, b string) string {
