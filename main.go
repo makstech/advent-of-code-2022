@@ -7,6 +7,7 @@ import (
 	"advent-of-code-2022/day4"
 	"advent-of-code-2022/day5"
 	"advent-of-code-2022/day6"
+	"advent-of-code-2022/day7"
 	"fmt"
 	"log"
 )
@@ -24,6 +25,7 @@ func main() {
 		"4": day4.Day4,
 		"5": day5.Day5,
 		"6": day6.Day6,
+		"7": day7.Day7,
 	}
 
 	if fun, ok := funcs[day]; ok {
