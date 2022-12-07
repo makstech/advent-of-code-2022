@@ -49,11 +49,18 @@ func Day7() {
 		}
 	}
 
+	needMoreFree := -70000000 + 30000000 + sizeMap[""]
+	dirToDeleteSize := sizeMap[""]
+
 	for _, s := range sizeMap {
 		if s <= 100_000 {
 			totalSize100k += s
 		}
+		if s >= needMoreFree && s < dirToDeleteSize {
+			dirToDeleteSize = s
+		}
 	}
 
 	fmt.Println("total size of at most 100000:", totalSize100k)
+	fmt.Println("total size of directory to delete:", dirToDeleteSize)
 }
