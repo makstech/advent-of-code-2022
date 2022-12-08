@@ -74,4 +74,47 @@ func Day8() {
 	}
 
 	fmt.Println("visible trees", visibleTrees)
+
+	highestScore := 0
+	for i, r := range grid {
+		for ii, t := range r {
+			if i == 0 || ii == 0 || i == rows-1 || ii == columns-1 {
+				continue
+			}
+			treesAbove := 0
+			for c := 1; c <= i; c++ {
+				if grid[i-c][ii] >= t || i-c == 0 {
+					treesAbove = c
+					break
+				}
+			}
+			treesBehind := 0
+			for c := 1; c <= ii; c++ {
+				if grid[i][ii-c] >= t || ii-c == 0 {
+					treesBehind = c
+					break
+				}
+			}
+			treesBelow := 0
+			for c := 1; c < rows-i; c++ {
+				if grid[i+c][ii] >= t || i+c == columns-1 {
+					treesBelow = c
+					break
+				}
+			}
+			treesFront := 0
+			for c := 1; c < columns-ii; c++ {
+				if grid[i][ii+c] >= t || ii+c == rows-1 {
+					treesFront = c
+					break
+				}
+			}
+			score := treesAbove * treesBehind * treesBelow * treesFront
+			if score > highestScore {
+				highestScore = score
+			}
+		}
+	}
+
+	fmt.Println("highest scenic score", highestScore)
 }
