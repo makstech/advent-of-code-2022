@@ -12,8 +12,11 @@ func Day9() {
 	list := strings.Split(string(file), "\n")
 
 	tailVisited := map[string]bool{}
-	tailPos := []int{0, 0}
-	headPos := []int{0, 0}
+	secondKnotVisited := map[string]bool{}
+	rope := make([][2]int, 10)
+	for i := 0; i < 10; i++ {
+		rope[i] = [2]int{0, 0}
+	}
 
 	for _, s := range list {
 		if s == "" {
@@ -22,43 +25,55 @@ func Day9() {
 		moves := strings.Split(s, " ")
 		steps, _ := strconv.Atoi(moves[1])
 		for i := 0; i < steps; i++ {
-			xDir := 0
-			yDir := 0
 			if moves[0] == "U" {
-				headPos[1]++
-				yDir++
+				rope[0][1]++
 			} else if moves[0] == "D" {
-				headPos[1]--
-				yDir--
+				rope[0][1]--
 			} else if moves[0] == "R" {
-				headPos[0]++
-				xDir++
+				rope[0][0]++
 			} else if moves[0] == "L" {
-				headPos[0]--
-				xDir--
+				rope[0][0]--
 			}
-			xDif := headPos[0] - tailPos[0]
-			yDif := headPos[1] - tailPos[1]
-			if strings.Contains("LR", moves[0]) {
-				if Abs(xDif) > 1 {
-					tailPos[0] = tailPos[0] + xDir
-					if Abs(yDif) > 0 {
-						tailPos[1] = tailPos[1] + yDif
-					}
+			for k := 1; k < 10; k++ {
+				xDif := rope[k-1][0] - rope[k][0]
+				yDif := rope[k-1][1] - rope[k][1]
+				if Abs(xDif) < 2 && Abs(yDif) < 2 {
+					break
 				}
-			} else {
-				if Abs(yDif) > 1 {
-					tailPos[1] = tailPos[1] + yDir
-					if Abs(xDif) > 0 {
-						tailPos[0] = tailPos[0] + xDif
+				if xDif == 0 {
+					if yDif > 0 {
+						rope[k][1]++
+					} else {
+						rope[k][1]--
 					}
+					continue
+				}
+				if yDif == 0 {
+					if xDif > 0 {
+						rope[k][0]++
+					} else {
+						rope[k][0]--
+					}
+					continue
+				}
+				if xDif > 0 {
+					rope[k][0]++
+				} else {
+					rope[k][0]--
+				}
+				if yDif > 0 {
+					rope[k][1]++
+				} else {
+					rope[k][1]--
 				}
 			}
-			tailVisited[strconv.Itoa(tailPos[0])+":"+strconv.Itoa(tailPos[1])] = true
+			secondKnotVisited[strconv.Itoa(rope[1][0])+":"+strconv.Itoa(rope[1][1])] = true
+			tailVisited[strconv.Itoa(rope[9][0])+":"+strconv.Itoa(rope[9][1])] = true
 		}
 	}
 
-	fmt.Println("positions tail of the rope visit:", len(tailVisited))
+	fmt.Println("positions 2nd knot of the rope visited:", len(secondKnotVisited))
+	fmt.Println("positions tail of the rope visited:", len(tailVisited))
 }
 
 func Abs(x int) int {
