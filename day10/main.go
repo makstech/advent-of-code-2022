@@ -14,6 +14,7 @@ func Day10() {
 	cycle := 0
 	x := 1
 	sumStrength := 0
+	drawing := ""
 
 	for _, s := range list {
 		if s == "" {
@@ -28,6 +29,16 @@ func Day10() {
 			cycle++
 			if cycle == 20 || (cycle-20)%40 == 0 {
 				sumStrength += cycle * x
+			}
+			pos := cycle % 40
+			if pos >= x && pos <= x+2 {
+				drawing += "#"
+			} else {
+				drawing += "."
+			}
+			if pos == 0 {
+				fmt.Println(drawing)
+				drawing = ""
 			}
 		}
 		if cycles == 2 {
