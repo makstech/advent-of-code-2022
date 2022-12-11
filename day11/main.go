@@ -60,7 +60,6 @@ func Day11() {
 	for r := 0; r < 10000; r++ {
 		MonkeyRound(monkeys2, false, allTest)
 	}
-	fmt.Println(monkeys2)
 	fmt.Println("level of monkey business after 10000 rounds of stuff-slinging simian shenanigans:", SortAndTopLevel(monkeys2))
 }
 
