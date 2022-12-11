@@ -3,6 +3,7 @@ package main
 import (
 	"advent-of-code-2022/day1"
 	"advent-of-code-2022/day10"
+	"advent-of-code-2022/day11"
 	"advent-of-code-2022/day2"
 	"advent-of-code-2022/day3"
 	"advent-of-code-2022/day4"
@@ -32,6 +33,7 @@ func main() {
 		"8":  day8.Day8,
 		"9":  day9.Day9,
 		"10": day10.Day10,
+		"11": day11.Day11,
 	}
 
 	if fun, ok := funcs[day]; ok {
